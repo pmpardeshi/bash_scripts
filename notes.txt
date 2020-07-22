@@ -1,0 +1,110 @@
+
+you can run scripts by bash script_name.sh
+you would have seen scripts running directly by ./script_name.sh
+in order to do this our script must have executing permissions
+we can assign those permisions using chmod
+chmod 755 script_name.sh
+
+
+
+$ bash hello.sh
+Hello World
+$ bash hello.sh
+Hello World
+mars is red
+$ ./hello.sh
+bash: ./hello.sh: Permission denied
+$ chmod 755 hello.sh
+$ ./hello.sh
+Hello World
+mars is red
+$ 
+
+
+
+*touch file_name //create file if not exist
+
+steps followed creating each script
+
+$ touch samp.sh
+$ chmod 755 samp.sh
+$ subl samp.sh //opens in sublime text
+$ 
+
+
+
+
+#!usr/bin/env bailey //bailey does not exist
+$ ./hello.sh
+bash: ./hello.sh: usr/bin/env: bad interpreter: No such file or directory
+$ 
+
+
+params passed to script are
+received in $x , x is a digit 0-9
+pass 9 is possible using {} eg. {10} but old vaersions of bash does not support it
+$0 path and name of script
+$# - number of arguments
+
+echo $?
+it shows the last return value of system
+
+$ echo $?
+0
+
+ see how params.sh changes the exit value 
+
+$ ./params.sh Pramod
+hello Pramod
+Sun Jul 19 09:53:53 IST 2020
+/home/pmpardeshi/pypractice/bash/shell scripting
+//here it is reflected 
+$ echo $?
+100 
+//now above cmd becomes the last cmd so if we run again it will show the exit code of above command
+$ echo $?
+0
+$ 
+
+
+*cksum - checksum
+
+to check the integrity of files
+
+
+$ cat names.txt
+pramod
+shubham
+navin
+summet
+swapnil
+$ cksum names.txt
+625911516 36 names.txt
+$ cat names.txt 
+//file changed
+pramod
+shubham
+navin
+summet
+swapnil
+prathamesh
+$ cksum names.txt
+468391604 47 names.txt //checksum changed
+$ cat names.txt //file restored
+pramod
+shubham
+navin
+summet
+swapnil
+$ cksum names.txt
+625911516 36 names.txt //checksum restored
+$ 
+
+integrity is checked if cksum is different then file is changed
+
+
+
+
+
+
+
