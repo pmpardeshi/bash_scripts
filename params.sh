@@ -5,7 +5,9 @@ echo hello $USER_NAME
 echo $(date)
 echo $(pwd)
 
-exit 0 #exit same as return, 0 means sucess everything other is error
+exit 0 
+
+#exit same as return, 0 means sucess everything other is error
 #exit code range is 0-255
 #output
 #hello Pramod

@@ -21,10 +21,27 @@ NAMES+="_Pardeshi" #without() it appends at end of first element
 
 echo Names after append :  ${NAMES[@]}
 
+unset NAMES[-1] #remove element
+
+echo Names after unset :  ${NAMES[@]}
+
+if [[ -z $EMPTY ]]; then
+	echo empty array
+fi
+
+if [[ ! -z $NAMES ]]; then
+	echo not an empty array
+fi
+
+
+
 # output-
 # $ ./array.sh
 # Third name is Navin
 # Just added Sumeet
 # Names before append : Pramod Shubham Navin Sumeet
 # Names after append : Pramod_Pardeshi Shubham Navin Sumeet Swapnil
+# Names after unset : Pramod_Pardeshi Shubham Navin Sumeet
+# empty array
+# not an empty array
 # $ 
