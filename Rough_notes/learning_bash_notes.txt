@@ -1,0 +1,328 @@
+shell history
+
+1971 : Thompson Shell (first unix shell)
+1975 : Mashey Shell
+1977 : Bourne Shell ( brought cd pwd export break continue in shell) not much user friendly looked like Algol
+1978 : C shell (csh) more similar to C, user friendly
+1989 : Bourne Again Shell bash brought echo printf read declare bind shell arithmetic
+
+d/- user group other
+(directory/not) rwx rwx rwx (permissions)
+
+
+expansions-
+{}- expansion
+
+$ echo {1..10..2}
+1 3 5 7 9
+$ echo {1..10..3}
+1 4 7 10
+$ echo {a..b..3}
+a
+$ echo {a..z..3}
+a d g j m p s v y
+$ echo {a..z}
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+
+
+touch file_{1..500}.txt //1 to 500 
+//this will sort files based on first chars not by integer
+// 429 will be followed by 43 and then 430
+//solve this using zero padding
+touch file_{01..500}.txt // it will correct the sorting way 
+
+
+/files$ touch files/file_{01..400}.txt
+/files$ mkdir ../otherfolder
+/files$ chmod 000 *_15*.txt //bolck all permissions to files file_150 - file_159
+$ cp -v files/* otherfolder/ 1>success.txt 2>error.txt
+
+*cut -d = -f 4
+
+three ways of echo
+no quote - does not intepret special chars, escape sequence is needed if you want to escape any characters like ()
+single quote/ strong quote - immutable
+double quote - best of both substitutes var also escapes character
+
+$ SAMP=pramod
+$ echo $SAMP is at delhi (India)
+bash: syntax error near unexpected token `('
+$ echo $SAMP is at delhi \(India\)
+pramod is at delhi (India)
+$ echo '$SAMP is at delhi (India)'
+$SAMP is at delhi (India)
+$ echo "$SAMP is at delhi (India)"
+pramod is at delhi (India)
+
+
+adding attribute to variables
+
+declare -i var=val #var is an integer
+
+declare -r var=val #var is read-only
+
+declare -l var=val #val will be converted to lower case
+
+declare -u var=val #val will be converted to uppercase
+
+declare -A var = val will be converted to assosicative array
+
+envronment variables are system variables / built-in variable 
+
+Here are a few environment variables.
+
+ HOME is your user's home directory.
+ 
+ PATH - directories searched for command to run
+ 
+ HOSTNAME is the name of the computer.
+ 
+ EDITOR is the name of the computer's default editor.
+
+SHELL - shell that is being used
+
+USER - username of person using session
+
+TERM - type of command line termiinal being used
+
+PWD - RETURNS CURRENT DIR
+
+MACHTYPE - machine type
+
+BASH_VERSION - bash version
+
+SECONDS - time passed since session is started , when used in script it counts the time from the script is run 
+
+unset is used to unset exported variables and not export which i typed somewhere and forgot
+
+to export a function use -f
+
+we can acess them like a normal variables
+we can also change them but change only lasts till script runs
+later system envronment values are restored
+
+command substitution
+- when we want to run a script and assign its output to a variable a coomand substitution is required
+it is achived by `command` or $(command)
+
+Arithmatic Operations - 
+ arithmatics expressions are need to be written in double braces ((arithmatic expression))
+
+ if you want to assign it to a variable use it with $
+ var=$((expression))
+
+supported expressions
+ exponential $a ** $b
+ multiplication $a * $b
+ division $a / $b
+ modulous $a % $b
+ addition $a + $b
+ substraction $a - $b
+ increment 
+
+default bash does not work with floating numbers
+we need bc (basic calcultion) program
+pipe float output to bc
+1/3 | bc 
+
+
+comparison oprations written in [[ ]] / []
+https://unix.stackexchange.com/questions/32210/why-does-parameter-expansion-with-spaces-without-quotes-work-inside-double-brack/32227#32227
+
+ strings - same symbols as c , < > <= != ==/=
+ integer - -lt -gt -le -ge -eq -ne 
+
+working with string
+
+
+$ a="hello "
+$ b="world"
+$ c=$a$b
+
+$ echo $c
+hello world
+
+$ echo ${#a}
+6
+
+$ echo length of b is ${#b}
+length of b is 5
+
+$ d=${c:3}
+$ echo string c from 3rd index is $d
+string c from 3rd index is lo world
+
+$ e=${c:3:4}
+
+$ echo 4 chars of string c from 3rd index is $e
+4 chars of string c from 3rd index is lo w
+
+$ echo last 4 chars of string c is ${c: -4}
+last 4 chars of string c is orld
+
+$ echo first 3 chars of last 4 chars of string c is ${c: -4:3}
+first 3 chars of last 4 chars of string c is orl
+
+String manipulations
+
+
+$ names="pramod shubham shubham navin"
+
+$ echo "changing first occurance of shubham in names we get : ${names/shubham/sumeet}" # use / for single change
+changing first occurance of shubham in names we get : pramod sumeet shubham navin
+
+$ echo $names
+pramod shubham shubham navin
+
+$ echo "changing all  occurances of shubham in names we get : ${names//shubham/sumeet}" # // to change all occurances
+changing all  occurances of shubham in names we get : pramod sumeet sumeet navin
+
+$ echo "changing shubham if its at begining we get : ${names/#shubham/sumeet}" # #-changes only if given string is first element
+changing shubham if its at begining we get : pramod shubham shubham navin
+
+$ echo "changing pramod  if its at begining we get : ${names/#pramod/sumeet}"
+changing pramod  if its at begining we get : sumeet shubham shubham navin
+
+$ echo "changing shubham if its at last  we get : ${names/%shubham/sumeet}" # %-changes only if given string is last element
+changing shubham if its at last  we get : pramod shubham shubham navin
+
+$ echo "changing navin if its at last  we get : ${names/%navin/sumeet}"
+changing navin if its at last  we get : pramod shubham shubham sumeet
+
+$ echo "changing name  if it starts with n  we get : ${names/n*/sumeet}" # * pstteern matching 
+changing name  if it starts with n  we get : pramod shubham shubham sumeet
+$ 
+
+Array - 
+
+declare -a array
+declare -A associative array
+
+EMPTY=()
+NAMES=("Pramod" "Shubham" "Navin")
+
+
+
+indirection
+
+$ x=abc
+$ echo x
+x
+$ echo $x
+abc
+$ abc=def
+$ echo abc
+abc
+$ echo $abc
+def
+$ echo ${!x}
+def
+$ !x 
+x=abc //thus when we echo it x is replaced as abc
+$ 
+
+x=${var:-default_val}
+
+// if var is unset then x gets assign with default_val
+
+
+$ echo $z //z is unset produce empty output
+
+$ echo ${z:-default}
+default
+$ 
+
+
+
+x=${var:?}
+// gives error if var not set
+
+$ x=${z:?}
+bash: z: parameter null or not set
+
+:+ same as default behaviour retutns nothing if not set and returns value if set
+
+${var:offset} for string , substring strarting from offset index , where first index is 0
+
+${var:offset:len} for string , substring of length len strarting from offset index , where first index is 0
+
+
+${#var} - length of string
+
+${var#pre} - removes substring matching with pre from begining of string
+(prefix removal)
+
+
+${var%post} - removes substring matching with post from end of string
+(postfix removal)
+
+
+$ x="hello world"
+$ echo ${x:1}
+ello world
+$ echo ${x:1:3}
+ell
+$ echo ${#x}
+11
+$ echo ${x#hello}
+world
+$ echo ${x%world}
+hello
+
+
+*shift 
+shifts var values to left
+val of first var is overwriiten by second var
+
+
+**coprocess - is the process which is active in bg ,it also has stdin and stdout so you can read and write in process 
+
+coproc ./ss.sh
+echo >&${ss[1]} //write in ss
+cat <&${coproc[0]}
+
+you can give name to coprocess
+coproc bgproc { ./ss.sh ; } //name { cmd ; }
+
+debugging script
+
+*bash
+run a script
+
+-n check for syntax error do not execute
+
+
+$ bash -n counter.sh 10
+counter.sh: line 9: syntax error near unexpected token `do'
+counter.sh: line 9: `do'
+$ 
+
+
+
+-x echo commands after processing
+ it gives the line by line info of command so that we can check which lines are executed
+
+$ bash -x counter.sh 10
++ COUNT_END=10
++ CUR_COUNT=1
++ '[' 1 -le 10 ']'
++ echo 'current count 1'
+current count 1
++ (( CUR_COUNT++ ))
++ '[' 2 -le 10 ']'
+
+
+set -u 
+	report the unused var
+
+set -x -sets -x opption of bash
+
+set +x -unsets -x option
+
+
+**trap 
+handle interupts
+
+trap 'just got int; exit' INT //ctrl+c
+trap 'just got quit;' QUIT  // ctrl+\ 

@@ -1,0 +1,49 @@
+*time
+time cmd
+
+$ time sleep 2
+
+real	0m2.001s
+user	0m0.001s
+sys	0m0.000s
+
+PATH=$PATH:new/path/
+appends path
+
+
+*source
+ sourcing a shell 
+ it is done using 
+ source script
+ or
+ "dot space"
+ . script
+
+Aliases
+
+alias ll="ls -l"
+alias python='python3'
+alias pip="pip3"
+assign commnads to other simpler names
+it works for commnads not strings
+
+unalias ll - to reset alias
+
+
+$ alias ll="ls -l"
+
+$ ll
+total 4
+-rw-rw-r-- 1 pmpardeshi pmpardeshi 349 Jul 21 10:16 notes_shellnscripts.txt
+
+$ ls
+notes_shellnscripts.txt
+
+$ unalias ll
+
+$ ll
+ll: command not found
+$ 
+
+
+

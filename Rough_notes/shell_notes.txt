@@ -1,0 +1,859 @@
+process of execution of command
+checks if built-in
+check if alias
+check command on disk 
+otherwise not find
+
+*chsh change shell
+
+*Environment varible
+variable for shell
+
+printenv
+echo $var
+
+*shell variable
+variables inside shell pwd 
+
+
+ at login bash checks 
+
+etc/profile
+/profile.d/*.sh  system en var and shell var
+/.bash_profile, profile var
+/.bashrc, alias bashfunction
+/etc/bashrc alias system wide
+/.bashrc, alias bashfunction
+
+non login 
+
+/.bashrc, alias bashfunction
+/etc/bashrc alias system wide
+/.bashrc, alias bashfunction
+
+bash variable 
+viewed using 
+*set 
+but it gives all the funnctions as well to avoide that change the behaviour of set using poxis
+set -o posix
+
+to set a vaiable simply use, VAR_name = Value
+
+to unset variable use, unset VAR_name
+
+environment variable.
+
+to view use 
+printenv
+
+to set env variable use export
+and to unset again use export
+
+export varname for both setting and unsetting
+
+autocomplete use tab
+not works if multiple options are possible
+
+hit tab twice to view options
+
+alt-b backword
+alt-f forward
+
+*history - gives history upto limit mostly 500
+
+!! - gives entire recent command from history
+
+
+/shell_n_process$ cat /etc/shadow
+cat: /etc/shadow: Permission denied
+/shell_n_process$ sudo !! <- gives entire last commnad
+sudo cat /etc/shadow
+root:!:17982:0:99999:7:::
+daemon:*:17737:0:99999:7:::
+bin:*:17737:0:99999:7:::
+sys:*:17737:0:99999:7:::
+sync:*:17737:0:99999:7:::
+games:*:17737:0:99999:7:::
+man:*:17737:0:99999:7:::
+lp:*:17737:0:99999:7:::
+mail:*:17737:0:99999:7:::
+news:*:17737:0:99999:7:::
+uucp:*:17737:0:99999:7:::
+proxy:*:17737:0:99999:7:::
+www-data:*:17737:0:99999:7:::
+backup:*:17737:0:99999:7:::
+list:*:17737:0:99999:7:::
+irc:*:17737:0:99999:7:::
+gnats:*:17737:0:99999:7:::
+nobody:*:17737:0:99999:7:::
+systemd-network:*:17737:0:99999:7:::
+systemd-resolve:*:17737:0:99999:7:::
+syslog:*:17737:0:99999:7:::
+messagebus:*:17737:0:99999:7:::
+_apt:*:17737:0:99999:7:::
+uuidd:*:17737:0:99999:7:::
+avahi-autoipd:*:17737:0:99999:7:::
+usbmux:*:17737:0:99999:7:::
+dnsmasq:*:17737:0:99999:7:::
+rtkit:*:17737:0:99999:7:::
+cups-pk-helper:*:17737:0:99999:7:::
+speech-dispatcher:!:17737:0:99999:7:::
+whoopsie:*:17737:0:99999:7:::
+kernoops:*:17737:0:99999:7:::
+saned:*:17737:0:99999:7:::
+pulse:*:17737:0:99999:7:::
+avahi:*:17737:0:99999:7:::
+colord:*:17737:0:99999:7:::
+hplip:*:17737:0:99999:7:::
+geoclue:*:17737:0:99999:7:::
+gnome-initial-setup:*:17737:0:99999:7:::
+gdm:*:17737:0:99999:7:::
+pmpardeshi:$6$XDauWS7/$nJmz6FHE/wlCHBAJHLtJmnq//VqG5wz/EIgbiTFbD6d.5r8gan93ytu2zV8ifXIURHdv/qmqnYmDmj/Hu.HSa1:17982:0:99999:7:::
+mysql:!:17982::::::
+mongodb:*:18002:0:99999:7:::
+nm-openvpn:*:18067:0:99999:7:::
+lightdm:*:18408:0:99999:7:::
+ftp:*:18425:0:99999:7:::
+/shell_n_process$ 
+
+
+
+
+
+!-x execute command at index from last
+!x execute command at given index number
+
+!command 
+to run most recent command starting with commnad 
+!ls
+
+$ !ls
+ls -lah /etc/*release
+-rw-r--r-- 1 root root 105 Jan 30 17:58 /etc/lsb-release
+lrwxrwxrwx 1 root root  21 Jan 30 17:58 /etc/os-release -> ../usr/lib/os-release
+
+!* - options and arguments of pervious command
+
+!!:x - xth argument of previous command starting with 0 index
+
+!$ - last argument of previous command
+
+!^ - first argument of previous command
+
+ls
+shell_notes.txt
+/shell_n_process$ cd ..
+$ ls shell_n_process/
+shell_notes.txt
+$ cd !*
+cd shell_n_process/
+/shell_n_process$ history | tail -n3
+ 2279  ls shell_n_process/
+ 2280  cd shell_n_process/ <- !* got replaced by ls's arguments
+ 2281  history | tail -n3
+
+
+*crtl+r - reverse search
+
+export HISTCONTROL=ignorespace
+export HISTCONTROL=ignoredupes
+export HISTCONTROL=erasedupes
+"option1:option2"
+
+export HISTIGNORE="REGUAR EXPn"
+
+
+HISTTIMEFORMATE ="%h %d %H:%M:%S> "
+
+%h / %b - month writtren format   prefer%b , %h was not the part of c89 and before
+%m month as a decible
+%d - day of the month 
+
+*date +"%d-%m-%Y"
+
+shows date in provided format
+
+HISTSIZE = -x unlimited / 0 Stop history / +x counts of history command
+
+
+[abc] - list of a b c
+[a-z] -  range from a to z
+[!abc] - not a b c 
+[-abc] - list including a b c and - 
+
+[:upper:]
+[:lower:]
+[:alpha:] both upper and lower
+[:alnum:] aplpha + number
+[:space:] space tab newline
+[:graph:] character excludig spaces
+[:punc:] punctuation
+[:cntrl:] nonprintable control chars
+[:xdigit:] hexadecimal
+[:digit:] 0-9
+
+ls file[[:digit:]]
+ls file[[:digit:][:punc:]]
+ls file[![:digit:][:punc:]] not digit
+
+all above for ? single character
+
+for *
+ls {*.jpg,*.png}
+
+extglob extended globs
+
+file?(abc) 0 or 1
+
+file+(abc) 1 to x occrences
+
+? and + =*
+
+file*(abc)
+file*(abc)
+
+ls !(*.jpg|*.png)
+
+ls (photo|Photo)* 0 or more occurance of Photo or photo
+
+either photo or Photo would match
+
+ls !(+(photo|file)*+(.jpg|.gif))
+
+
+
+shopt to show
+ shopt -s extglob to set
+
+
+*echo 
+single quote is immutable
+
+:~$ echo $USER
+pmpardeshi
+:~$ echo my name is $USER
+my name is pmpardeshi
+:~$ echo "my name is $USER"
+my name is pmpardeshi
+:~$ echo 'my name is $USER'
+my name is $USER
+:~$ echo \$user
+$user
+
+*pushd - to push repos in directory stack
+*popd +index- pop dir at index
+~index to acess dir
+dirs = to display  directory stack 
+used with any command
+
+
+**bash substitution
+~ is used for bash tilda substitution
+{} curly brace substitution
+[] square substitution does not exist 
+
+do not put quotes around substitution
+
+
+
+
+echo ~ ,current home dir
+echo ~root root home dir
+~+ same as .
+~- last dir   used with echos only
+
+:~$ echo ~
+/home/pmpardeshi
+:~$ echo ~root
+/root
+:~$ cd /var
+:/var$ echo ~+
+/var
+:/var$ echo ~-
+/home/pmpardeshi
+:/var$ pushd /etc
+/etc /var
+:/etc$ pushd /var
+/var /etc /var
+
+:/var$ dirs
+/var /etc /var
+:/var$ echo ~0
+/var
+:/var$ echo ~1
+/etc
+:/var$ cd ~1
+:/etc$ cd 
+:~$ popd +1
+~ /var
+:~$ ~
+bash: /home/pmpardeshi: Is a directory
+:~$ -
+-: command not found
+:~$ ~+
+bash: /home/pmpardeshi: Is a directory
+:~$ 
+
+echo s{pe,pi}ll
+spell spill
+:~$ echo "s{pe,pi}ll"
+s{pe,pi}ll
+:~$ echo 's{pe,pi}ll'
+s{pe,pi}ll
+ echo 's[pe,pi]ll'
+s[pe,pi]ll
+:~$ echo s[pe,pi]ll
+s[pe,pi]ll
+:~$ echo s[pi]ll
+s[pi]ll
+
+acess variable using $ , put {} around variable name otherwise it could be misinteprited
+put everything in double quotes "" 
+
+
+$ pdir='files/today/'
+$ fname="report"
+$ ls
+shell_notes.txt
+$ mkdir -p $pdir
+$ ls
+files  shell_notes.txt
+$ ls -d $pdir
+files/today/
+$ touch $pdir/$fname
+$ ls -l !*
+ls -l $pdir/$fname
+-rw-r--r-- 1 pmpardeshi pmpardeshi 0 Jul 17 14:51 files/today//report
+$ touch $pdir/$fname_jan
+$ ls !*
+ls $pdir/$fname_jan
+report
+$ touch $pdir/${fname}_jan
+$ ls !*
+ls $pdir/${fname}_jan
+files/today//report_jan
+$ ls "${pdir}/${fname}_jan"
+files/today//report_jan
+
+we can use substitution to execute commnads as well
+
+$ whoami
+pmpardeshi
+
+$ echo "my name is $(whoami)"
+my name is pmpardeshi
+$ echo "my name is ${whoami}"
+my name is 
+$ echo "my name is `whoami`"
+my name is pmpardeshi
+$  I=`whoami`
+$ echo my name is $I
+my name is pmpardeshi
+
+
+use $() or `` for command substitution it is also used if we want to assign the output of command to a  variable
+
+which find
+
+/usr/bin/find
+
+$ echo 
+
+"permissions for find are $(ls -l $(which find))"
+permissions for find are -rwxr-xr-x 1 root root 238080 Nov  5  2017 /usr/bin/find
+$  
+
+
+
+named pip -
+fifo
+
+pipe between two terminal
+
+* mkfifo pipe_name , create named pipe
+
+write to pipe using '>pipe_name'
+
+access pipe using pipe_name
+
+
+Termial 1 
+
+:~$ mkfifo named_pipe
+:~$ echo "hi" > named_pipe 
+:~$  ls -lh  'pypractice/bash/commandlinebasics/' >named_pipe
+
+
+Terminal 2
+
+:~$ cat named_pipe 
+hi
+:~$ sort named_pipe | tail -n6
+-rw-r--r-- 1 pmpardeshi pmpardeshi 107K Jul 16 18:48 myfiles.tar.gz
+-rw-r--r-- 1 pmpardeshi pmpardeshi 160K Jul 16 18:47 myfiles.tar
+-rw-r--r-- 1 pmpardeshi pmpardeshi  168 Jul 15 16:35 README.md
+-rw-r--r-- 1 pmpardeshi pmpardeshi   94 Jul 16 19:04 filelist.txt
+-rw-rw-r-- 1 pmpardeshi pmpardeshi  15K Jul 17 09:30 notes.txt
+total 312K
+ 
+
+
+once you write into pipe the io of that terminal is blocked until other terminal reads from pipe (synchronous)
+
+
+**
+&> both error and output
+> output
+2> error
+< input
+
+*tee - to write std output both file and screen
+
+:~$  find /etc 2>'pypractice/bash/shell_n_process/etcerror' | sort | tee  'pypractice/bash/shell_n_process/etcsort' | wc -l
+3358
+
+
+
+to hide the output redirerct it to /dev/null
+
+:~$ find /etc &> /dev/null
+:~$ 
+
+**each process has a process id and a parent process that created it,which also has its own id
+
+
+*ps processes
+
+type of options
+unix = -x
+gnu = --word
+bsd = x
+
+
+-e all
+-H heirarchy
+-f full detail
+-F aloccated memory cpu
+-l 17 columns information
+
+--format keys_soudi,pid,ppid,%cpu,cmd
+--sort key acending /-key descending
+-U - username
+-u - userid
+-C - program
+
+:~$ ps -e --format uid,pid,ppid | tail -n6
+ 1000 28562  1812
+ 1000 30224  1812
+ 1000 30230 30224
+ 1000 31813  1812
+ 1000 31821  1812
+ 1000 32540 24572
+
+
+:~$ ps -ef | tail -n7
+pmparde+ 28348 27603  0 16:56 pts/1    00:00:00 tail -n7
+pmparde+ 28562  1812  0 Jul07 ?        00:00:00 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+pmparde+ 30224  1812  0 Jul11 ?        00:00:00 chromedriver --port=39083
+pmparde+ 30230 30224  0 Jul11 ?        00:00:18 [chrome] <defunct>
+pmparde+ 31813  1812  0 Jul08 ?        00:00:02 /usr/bin/zeitgeist-daemon
+pmparde+ 31821  1812  0 Jul08 ?        00:00:01 /usr/lib/zeitgeist/zeitgeist/zeitgeist-fts
+pmparde+ 32540 24572  0 Jul12 tty2     00:00:00 /usr/lib/firefox/firefox -contentproc -parentBuildID 20200625152958 -prefsLen 10556 -prefMapSize 224202 -appdir /usr/lib/firefox/browser 24572 true rdd
+:~$ ps -C firefox
+  PID TTY          TIME CMD
+24572 tty2     04:10:38 firefox
+:~$ 
+
+*top - realtime process info
+
+
+*pidof 
+*pgrep
+
+*kill -l
+
+send signal to process 
+default signal is SIGTERM
+SIGTERM does any one of three
+1. kills process immediatly
+2. kills after some time
+3. process continues ignoring signal
+
+sure way to kill process is SIGKILL
+but its not recomended as imp process may be killed abruptly
+
+
+dd - duplicate disk 
+ if - input file
+ of - ouput file
+
+below we send usr1 sgnal to process so that it shows output
+
+ terminal1
+:~$ dd if=/dev/zero of=/dev/null
+
+34846703+0 records in
+34846703+0 records out
+17841511936 bytes (18 GB, 17 GiB) copied, 70.4133 s, 253 MB/s
+
+
+ terminal2
+:~$ kill -USR1 $(pidof dd)
+
+dd does not show any output hence we send signal to show its proress
+
+
+:~$ pidof gedit
+29438
+:~$ kill $(pidof gedit)
+:~$ pidof gedit
+:~$ 
+
+
+
+
+*killall name 
+kill process with given name
+
+
+process Niceness/PRIORITY-
+
+HIGHER PRIORITY MEANS LESS NICENESS , THEY ARE INVERSLY PROPOTIONAL
+
+niceness leves for
+PRIVILAGED USER : 0 TO -19 
+UNPRIVILAGED USER : 19 TO 0
+
+we can set nice level by 
+
+nice -x process
+
+:~$ sudo nice --2 top //setting -2
+
+
+we can renice it using
+
+renice x process
+
+we need sudo privilages to change into or from negative niceness
+
+
+:~$ ps -C top --format pid,nice,cmd
+  PID  NI CMD
+ 8932   2 top
+:~$ ps -C top --format pid,nice,cmd
+  PID  NI CMD
+ 8955  -2 top
+:~$ sudo renice 5 8955
+[sudo] password for pmpardeshi: 
+8955 (process ID) old priority -2, new priority 5
+:~$ ps -C top --format pid,nice,cmd
+  PID  NI CMD
+ 8955   5 top
+
+
+jobs - process in background
+
+:~$ dd if=/dev/zero of=/dev/null
+starts process 
+
+^Z // ctrl+z stops process
+[2]+  Stopped                 dd if=/dev/zero of=/dev/null
+
+//verify
+:~$ jobs
+[1]-  Stopped                 python3
+[2]+  Stopped                 dd if=/dev/zero of=/dev/null
+
+//start again in background
+:~$ bg 2
+[2]+ dd if=/dev/zero of=/dev/null & //& indicates process running in background
+
+//start in foreground
+:~$ fg 2
+dd if=/dev/zero of=/dev/null
+
+// ctrl c teminates process 
+
+^C37813668+0 records in
+37813668+0 records out
+19360598016 bytes (19 GB, 18 GiB) copied, 102.484 s, 189 MB/s
+
+//directly start process in bg by adding &
+
+:~$ dd if=/dev/zero of=/dev/null &
+[2] 9485
+
+//verify
+:~$ jobs
+[1]+  Stopped                 python3
+[2]-  Running                 dd if=/dev/zero of=/dev/null &
+
+we can kill process in bg by bringing it to fg and then ctrl+c
+or use killall process
+
+:~$ killall dd
+[2]-  Terminated              dd if=/dev/zero of=/dev/null
+:~$ 
+
+//verify
+
+:~$ jobs
+[1]+  Stopped                 python3 //dd is not listed here
+:~$ 
+
+
+*at
+
+:~$ sudo apt install -y at
+:~$ sudo systemctl start atd
+:~$ sudo systemctl enable atd
+
+// below two commands are used to star service at boot 
+
+
+sudo apt install at time /time formats supported
+
+:~$ at now+2min
+warning: commands will be executed using /bin/sh
+at> cd ~/Documents
+at> <EOT> //ctrl+d
+job 3 at Sat Jul 18 14:13:00 2020
+
+//check
+:~$ atq
+4	Sat Jul 18 14:13:00 2020 a pmpardeshi
+
+//details
+:~$ at -c 4
+
+//create batch commands using batch
+*batch - batch works same as at
+//differrence is batch only executes when system load average usage drops below 0.8
+
+//check
+atq
+
+
+*cron - recuring task with time
+
+user cron jobs
+specific to user
+manage by normal user
+var/spool/cron
+
+
+system ron jobs
+system wide run by os not user
+/ect/cron.d
+manage root
+
+//https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-ubuntu-1804
+
+
+min hr day month(jan to dec) week command
+
+:~$ sudo apt install cron
+:~$ sudo systemctl start cron
+:~$ sudo systemctl enable cron
+
+:~$ crontab -e // opens a file where cronjobs to be inserted
+
+
+:~$ sudo nano /etc/cron.d/backupdocs //crontab for root system cron tabs
+
+limit at or cron
+
+/etc/at.allow
+/etc/cron.allow
+
+/etc/at.deny
+/etc/cron.deny
+
+//default deny files exist and are empty
+// to deny user put username in deny files
+//allow files do not exist already
+// we have to create them
+// allow overwrites deny
+// that mean any user listed in allow will be allowed irrespective of there mention in deny files
+// however that also means if allow files are empty noone is allowed to create cronjobs or at jobs
+
+'''
+pam 
+
+-/+
+access control: user : service
+
+:~$ sudo nano /etc/security/access.conf
+
+jhepl naay nantar sathi http://manpages.ubuntu.com/manpages/bionic/man7/pam.7.html
+
+'''
+
+system services - os services run in backend
+
+- web server
+- file server
+-mail server
+- network server
+- authentication servers
+
+system service is called daemon "pronounce diman / deman"
+
+
+systemd - system service
+
+kernel on boot starts service which starts other services
+
+sys V init
+
+was default on boot system initially 1980.
+
+problems it had
+- slow starting of service
+- no dependencies
+- on restart it would loose connection for all
+
+alternatives -
+
+launchd
+Upstart
+systemd
+
+we will learn systemd, as its new standard
+
+- systemd objects are called units
+we will see service unit,
+
+cmd used to manage service unit is systemctl
+
+systemctl list-unit-files -at service 
+
+it will show two columed output
+service_name service_state
+
+3 states of service are 
+enabled - starts automatic on boot
+disabled - does not start automatic on boot
+static - service cannot be enabled
+
+:~$ systemctl list-unit-files -at service | head  -n7
+UNIT FILE                                  STATE          
+accounts-daemon.service                    enabled        
+acpid.service                              disabled       
+alsa-restore.service                       static         
+alsa-state.service                         static         
+alsa-utils.service                         masked         
+anacron.service                            enabled        
+:~$ 
+
+//to prevent service from being enabled by manually or automatically use mask option
+
+//we can start or stop enabled services using start / stop option
+
+//we can check using is-active option 
+
+:~$ sudo systemctl mask  atd
+Created symlink /etc/systemd/system/atd.service → /dev/null.
+
+:~$ sudo systemctl start  atd
+Failed to start atd.service: Unit atd.service is masked.
+
+:~$ sudo systemctl unmask  atd
+Removed /etc/systemd/system/atd.service.
+
+:~$ sudo systemctl start  atd
+:~$ sudo systemctl is-active  atd
+active
+
+:~$ 
+
+//we can also enable and disable command using enable and disable options
+// we can check it using is-enabled option
+
+
+
+systemctl list-units -at service
+
+output in below format
+
+service loaded/not active/not running/not description 
+
+it shows enabled services
+
+:~$ systemctl list-units -at service | head -n7
+  UNIT                                                LOAD      ACTIVE   SUB     DESCRIPTION                                                                     
+  accounts-daemon.service                             loaded    active   running Accounts Service                                                                
+  acpid.service                                       loaded    active   running ACPI event daemon                                                               
+  alsa-restore.service                                loaded    active   exited  Save/Restore Sound Card State                                                   
+  alsa-state.service                                  loaded    inactive dead    Manage Sound Card State (restore and store)                                     
+  anacron.service                                     loaded    inactive dead    Run anacron jobs                                                                
+  apache2.service                                     loaded    active   running The Apache HTTP Server                                                          
+:~$ 
+
+:~$ systemctl list-units -t service --state running | head -n7  // list running services
+UNIT                        LOAD   ACTIVE SUB     DESCRIPTION                                                     
+accounts-daemon.service     loaded active running Accounts Service                                                
+acpid.service               loaded active running ACPI event daemon                                               
+apache2.service             loaded active running The Apache HTTP Server                                          
+atd.service                 loaded active running Deferred execution scheduler                                    
+avahi-daemon.service        loaded active running Avahi mDNS/DNS-SD Stack                                         
+bluetooth.service           loaded active running Bluetooth service                                               
+:~$ 
+
+service files have .service extention
+
+to view info of any service simply use cat
+
+
+:~$ systemctl cat rsyslog //dont use extention
+# /lib/systemd/system/rsyslog.service
+[Unit]
+Description=System Logging Service
+Requires=syslog.socket
+Documentation=man:rsyslogd(8)
+Documentation=http://www.rsyslog.com/doc/
+
+[Service]
+Type=notify
+ExecStart=/usr/sbin/rsyslogd -n
+StandardOutput=null
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+*To get status of service use status option
+
+:~$ systemctl status rsyslog
+
+● rsyslog.service - System Logging Service
+   Loaded: loaded (/lib/systemd/system/rsyslog.service; enabled; vendor pr
+   Active: active (running) since Sat 2020-07-18 09:20:22 IST; 9h ago
+     Docs: man:rsyslogd(8)
+           http://www.rsyslog.com/doc/
+ Main PID: 1111 (rsyslogd)
+    Tasks: 4 (limit: 4915)
+   CGroup: /system.slice/rsyslog.service
+           └─1111 /usr/sbin/rsyslogd -n
+
+Jul 18 09:20:22 lenovo systemd[1]: Starting System Logging Service...
+Jul 18 09:20:22 lenovo rsyslogd[1111]: imuxsock: Acquired UNIX socket '/ru
+Jul 18 09:20:22 lenovo rsyslogd[1111]: rsyslogd's groupid changed to 106
+Jul 18 09:20:22 lenovo systemd[1]: Started System Logging Service.
+Jul 18 09:20:22 lenovo rsyslogd[1111]: rsyslogd's userid changed to 102
+Jul 18 09:20:22 lenovo rsyslogd[1111]:  [origin software="rsyslogd" swVers
+
+
+:~$ sudo systemctl stop atd
+
+ Loaded: loaded (/lib/systemd/system/atd.service; enabled; vendor preset
+   Active: inactive (dead) since Sat 2020-07-18 19:20:58 IST; 2min 52s ago
+     Docs: man:atd(8)
+
+:~$ sudo systemctl start atd
+:~$ sudo systemctl is-active  atd
+[sudo] password for pmpardeshi: 
+active
+

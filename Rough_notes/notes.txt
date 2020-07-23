@@ -1,0 +1,770 @@
+genreal pattern of commands is ,command -option arguments, where option and argumetns may not be present,
+option are to chnage the behaviour of commnad it starts with dash followed by mostly single letter.
+multiple options may be listed by giving space betwwen them  "-i -l" or can be combined together through single dash "-il" where order does not matter "-li" is the same as "-il" . there are certain options that start with double dash --l --i . they may have multiple letters and cannot be combined 
+
+
+keyboard shortcut 
+
+	1. Tab - autocompletes where only single file specifies existing text
+	2. ctrl+A - begining of line
+	3. ctrl+e - end of line
+	4. ctrl+ (left/right) - move around a word at a time
+	5. ctrl+U to cut from cursor to brgining
+	6 ctrl+k to cut from cursor to end
+	7 ctrl+y to paste cut line
+	8 ctrl+r -reverse saerch, search command from history
+	9 copy paste ctrl+shift+c/v
+
+
+* ls  - list of files and folders' name
+
+ options 
+	 1 -l - long list , details of file and folders with name
+
+	 2. -R - list recursively , when folder comes it lists its files as well
+
+	 3. -h human friendly formate , used with -l gives file size in KB instead of bytes
+
+	 4. -a hiddend files
+
+	 5 -1 - to show output in single column
+
+folder blue , link light blue, file white/black , 
+
+
+
+*date +"%d-%m-%Y"
+
+ shows date in provided format
+
+
+*printf
+	echo does not handle escape characters
+
+$ echo "\t"
+\t
+$ echo \t
+t
+
+so printf is used to format a string for escape character like tab space and newline
+
+$ printft%s\nID\t%04d\n" "pramod" "12" 
+//%04d - defines that ID must be of 4 digits if its not, pad zeros in front of it  
+name:	pramod
+ID	    0012
+
+ -v = assigns output to variable
+
+$ printf -v DATA  "name:\t%s\nID\t%04d\n" "pramod" "12"
+$ echo $DATA
+name: pramod ID 0012
+$ echo "$DATA" //double quote to preserve tabs and newline
+name:	pramod
+ID	0012
+
+
+
+
+*read 
+
+https://linuxhint.com/bash_read_command/
+
+ read var - sets user input to var
+ -p "msg " - prompt msg for user
+ -s - silent -do not show input like in passwords
+ -r - to not skip the special chars 
+ -a array
+
+*echo 
+ -n removes trailing new line character
+
+$ echo pramod
+pramod
+$ //cursor starts from new line after echo
+$ echo -n  pramod
+pramod$  //cursor on same line as echo
+
+-e - enable backslash chars
+-E - disable backslash chars \t \n
+
+$ echo "name: \t pramod"
+name: \t pramod
+$ echo -e "name: \t pramod"
+name: 	 pramod
+$ echo -e "name: \n pramod"
+name: 
+ pramod
+$ echo -E  "name: \n pramod"
+name: \n pramod
+$ 
+
+
+echo ls is same as echo *
+
+
+* man - manual 
+man ls - gives info of ls command
+
+
+* apropos - takes word and gives command to do it.
+
+*file - gives file type  
+
+ file README.md 
+
+README.md: ASCII text
+
+
+* stat - gives info  
+
+stat README.md 
+
+  File: README.md
+  Size: 168       	Blocks: 8          IO Block: 4096   regular file
+Device: 808h/2056d	Inode: 8453586     Links: 1
+Access: (0644/-rw-r--r--)  Uid: ( 1000/pmpardeshi)   Gid: ( 1000/pmpardeshi)
+Access: 2020-07-15 16:35:56.924218001 +0530
+Modify: 2020-07-15 16:35:54.461449850 +0530
+Change: 2020-07-15 16:35:54.461449850 +0530
+ Birth: -
+
+* pwd - print working directory , gives absolute path
+
+(base) pmpardeshi@lenovo:~/pypractice/bash/commandlinebasics$ pwd
+
+/home/pmpardeshi/pypractice/bash/commandlinebasics
+
+
+*cd - change directory
+
+cd Exercise files -> invalid , 
+cd Exercise\ files -> invalid , 
+
+cd - : directs to previously working folder
+
+/departments/hr/policies$ cd -
+
+/home/pmpardeshi/pypractice/bash/commandlinebasics/Exercise Files/departments/sales/affiliates
+/departments/sales/affiliates$ 
+
+cd .. : directs parent directory
+
+we can use it to move around by ../another_sub_dir_in_parent_dir
+
+
+* mkdir path/foldername - creates folder with given name at the given path
+
+if no path is given it creates folder in same directory
+
+multiple folders can be created by giving multiple arguments
+
+-p if you want to create a folder and a folder inside that folder usually you have to carete folder then another folder giving path. with -p you can give subfolder path and it will create any parent folders required
+
+
+*rmdir - remove (empty) folders use rm for nonempty folder
+
+
+*cp copy 
+ cp path/file path/copyname
+
+ *mv move/rename
+
+ mv path/file path/file
+
+ mv file1 file2 - rename file1 to file2
+
+ * - multiple commands - mv *.txt txt
+
+ ? - single files mv poems?.txt txt
+
+*rm
+remove file
+
+-r remove contents of folder along with folder
+-f to hide the prompt it shows for deleting each folder in subfolder
+	
+rmdir departments/marketing/
+
+rmdir: failed to remove 'departments/marketing/': Directory not empty
+
+rm departments/marketing/
+rm: cannot remove 'departments/marketing/': Is a directory
+
+ rm -r departments/marketing/
+ rmdir departments/marketing/
+
+rmdir: failed to remove 'departments/marketing/': No such file or directory
+
+ ls
+departments  dupes.txt  log.tar.gz  poems.txt  simple_data.txt  subdir  test.sh
+
+ ls departments/
+engineering  finance  hr  legal  sales
+ 
+
+
+*find
+
+find path -argumennt parameter
+
+find . -name 'poe*'
+
+find . -name '*d*'
+
+./simple_data.txt
+./subdir
+./departments
+./departments/engineering/drawings
+./departments/finance/spreadsheets
+./departments/finance/documents
+./departments/hr/candidates
+./dupes.txt
+
+
+sudo - root user permossions 
+
+-k to kill previlages before grace time 
+-s to completly switch to root ,end it with exit
+
+permissions 
+
+user group others
+rwx	 rwx   rwx
+
+*chmod - change permissions 
+r-4 w-2 x-1
+user-u group-g others-o All-a
+
+chmod g=r 
+
++ - adds to existing permission
+- removes permission
+= - sets given permission but removes all other permission
+
+
+ chmod 644 test.sh
+$ chmod a-x test.sh
+$ ls
+departments  dupes.txt  log.tar.gz  poems.txt  simple_data.txt  subdir  test.sh
+$ cat test.sh
+#!/usr/bin/env bash
+echo -e "\n\tHello from the Test Script!\n"
+$ chmod u-r test.sh
+$ cat test.sh
+cat: test.sh: Permission denied
+$ chmod 755 test.sh
+$ cat test.sh
+#!/usr/bin/env bash
+echo -e "\n\tHello from the Test Script!\n"
+$ 
+
+*chown change owner
+*chgrp chnage grp
+
+
+**Links  - kind of pointer to file
+
+hard link - points data on disk thus not affected if file is moved
+symbolic link - points file on disk affects if path of original file changes
+
+*ln 
+-s converts to symbolic link , symbolic link as it point to file breaks if original file is moved
+
+defasult is hard link it does not affected by moving of file
+
+$ ls
+
+departments  dupes.txt  log.tar.gz  poems.txt  simple_data.txt  subdir  test.sh
+
+$ ln -s poems.txt lit.txt
+
+$ ls
+departments  lit.txt     poems.txt        subdir
+dupes.txt    log.tar.gz  simple_data.txt  test.sh
+
+$ ls -l
+total 152
+drwxr-xr-x 7 pmpardeshi pmpardeshi   4096 Jul 15 19:26 departments
+-rw-r--r-- 1 pmpardeshi pmpardeshi    160 Jul 15 16:35 dupes.txt
+lrwxrwxrwx 1 pmpardeshi pmpardeshi      9 Jul 15 19:56 lit.txt -> poems.txt
+-rw-r--r-- 1 pmpardeshi pmpardeshi 130340 Jul 15 16:35 log.tar.gz
+-rw-r--r-- 1 pmpardeshi pmpardeshi   1474 Jul 15 16:35 poems.txt
+-rw-r--r-- 1 pmpardeshi pmpardeshi    129 Jul 15 16:35 simple_data.txt
+drwxr-xr-x 2 pmpardeshi pmpardeshi   4096 Jul 15 19:09 subdir
+-rwxr-xr-x 1 pmpardeshi pmpardeshi     64 Jul 15 16:35 test.sh
+
+$ ln  poems.txt lit.txt
+ln: failed to create hard link 'lit.txt': File exists
+
+$ ln  poems.txt lit2.txt
+
+$ ls -l
+total 156
+drwxr-xr-x 7 pmpardeshi pmpardeshi   4096 Jul 15 19:26 departments
+-rw-r--r-- 1 pmpardeshi pmpardeshi    160 Jul 15 16:35 dupes.txt
+-rw-r--r-- 2 pmpardeshi pmpardeshi   1474 Jul 15 16:35 lit2.txt
+lrwxrwxrwx 1 pmpardeshi pmpardeshi      9 Jul 15 19:56 lit.txt -> poems.txt
+-rw-r--r-- 1 pmpardeshi pmpardeshi 130340 Jul 15 16:35 log.tar.gz
+-rw-r--r-- 2 pmpardeshi pmpardeshi   1474 Jul 15 16:35 poems.txt
+-rw-r--r-- 1 pmpardeshi pmpardeshi    129 Jul 15 16:35 simple_data.txt
+drwxr-xr-x 2 pmpardeshi pmpardeshi   4096 Jul 15 19:09 subdir
+-rwxr-xr-x 1 pmpardeshi pmpardeshi     64 Jul 15 16:35 test.sh
+
+hardlinks appear as file itself any changes in original file is reflected in links as well
+
+
+** unix philosophy - 
+a tool should do one thing only
+use text interface
+modular tools
+
+
+*wc -
+wc file / wc <<< string
+ gives x y z ,
+ x - num of lines
+ y - num of words
+ z - num of characters +1 for new line character at last line
+
+ wc lit.txt
+  55  264 1474 lit.txt
+
+
+** pipes 
+send output of one command as input to another command done by putting | between command
+
+however | only sends stdout to other commnad
+
+in case we want stderr as well put  cmd_1 2>&1 | cmd_2 or for bash specific scripts cmd_1 |& cmd_2
+
+$ 
+
+echo " hello world" | wc
+
+      1       2      13
+
+*cat concatinate
+
+display file content
+
+-n numbers lines
+
+$ 
+cat lit.txt
+
+/*
+	content of lit.txt
+*/
+
+*head - first 10 lines of code
+*tail - last 10 lines of code
+
+	-nx / -x : - xlines first/last
+
+	-f file - writes to files and monitors it for changes
+
+head -n3 poems.txt
+
+
+Percy Shelley
+
+Ozymandias
+$ 
+
+
+
+cat poems.txt | cat -n | tail -n5
+
+    51	
+    52	Tyger Tyger burning bright, 
+    53	In the forests of the night: 
+    54	What immortal hand or eye,
+    55	Dare frame thy fearful symmetry?
+
+
+cat poems.txt | tail -n5 | cat -n5
+
+     1	
+     2	Tyger Tyger burning bright, 
+     3	In the forests of the night: 
+     4	What immortal hand or eye,
+     5	Dare frame thy fearful symmetry?
+
+
+
+
+*less 
+less file
+controllable view of file
+f orward -b back
+q- quit
+
+*grep , search case sensetive
+
+-q quite do not produce output
+
+-n number the lines
+
+-i case insensitive
+
+-v - it will search the word and drop the line it finds word in instead of displaying 
+
+-E - apply expression [hijk]
+
+grep -n "the" lit2.txt | tail -n2
+
+50:Did he who made the Lamb make thee?
+53:In the forests of the night: 
+
+awk 
+it breaks line into words
+startting with $1
+$0 indicates entire line
+
+awk '[/match/]{code/command}' file
+
+multiple match is possible as /mat1/ || /mat2/
+/pts/ || $8~/35/
+if line has pts or 8th word is 35 ,remeber only put those words in // that you want exactly as it is
+
+
+
+to manipulate file display data
+
+$ cat simple_data.txt 
+
+Name	ID	Team
+Scott	314	Purple
+Ananti  991     Orange
+Jian    3127    Purple
+Miguel  671     Green
+Wes	1337	Orange
+Anne	556	Green
+
+
+$ awk '{print $2}' simple_data.txt 
+ID
+314
+991
+3127
+671
+1337
+556
+
+$ awk '{print $2 "\t" $1}' simple_data.txt 
+ID	Name
+314	Scott
+991	Ananti
+3127	Jian
+671	Miguel
+1337	Wes
+556	Anne
+
+$ awk '{print $2 "\t" $1}' simple_data.txt | sort -n
+ID	Name
+314	Scott
+556	Anne
+671	Miguel
+991	Ananti
+1337	Wes
+3127	Jian
+$ 
+
+
+*sed string editor
+
+change contents of file
+
+-e for multiple operations
+
+sed -e operatn -e another_operation 
+
+sed '[/match/]operation/string1/string2/scope' file  / <slash>- at last indicates end of operation
+
+some advance operations
+1 sed '/pramod/s/result/pass/g'
+ if line has pramod in it then substitute result with pass for all occurances as g - global
+
+2 sed '/apple/,/orange/d'
+ if line has apple on it then go to line with orange in it and delete all the lines between then including them
+
+ 3 sed '/imp/!s/do/postpone'
+  if line has imp in it do not substitute do to postpone  in other words in every line not having imp substitute do with postpone
+
+  simple example
+
+$ cat simple_data.txt 
+Name	ID	Team
+Scott	314	Purple
+Ananti  991     Orange
+Jian    3127    Purple
+Miguel  671     Green
+Wes	1337	Orange
+Anne	556	Green
+
+$ sed 's/Orange/red' simple_data.txt
+sed: -e expression #1, char 12: unterminated `s' command **forgot to add last /
+
+$ sed 's/Orange/red/' simple_data.txt
+Name	ID	Team
+Scott	314	Purple
+Ananti  991     red
+Jian    3127    Purple
+Miguel  671     Green
+Wes	1337	red
+Anne	556	Green
+
+
+
+*sort
+
+sort option file
+
+sorts the string based on alphabetic order of first key
+
+-kx - sorts based on x column isntead of first k2 second column in aplphabetic order
+-n to sort in numeric order
+-u to give unique lines
+
+$ sort simple_data.txt 
+Ananti  991     Orange
+Anne	556	Green
+Jian    3127    Purple
+Miguel  671     Green
+Name	ID	Team
+Scott	314	Purple
+Wes	1337	Orange
+
+$ sort -k2 simple_data.txt 
+Wes	1337	Orange
+Jian    3127    Purple
+Scott	314	Purple
+Anne	556	Green
+Miguel  671     Green
+Ananti  991     Orange
+Name	ID	Team
+
+$ sort -k2 -n simple_data.txt 
+Name	ID	Team
+Scott	314	Purple
+Anne	556	Green
+Miguel  671     Green
+Ananti  991     Orange
+Wes	1337	Orange
+Jian    3127    Purple
+
+$ cat dupes.txt
+Here's a line of text.
+Here's a line of text.
+Text can be easy to work with.
+But some text can be tricky.
+Here's a line of text.
+Text can be easy to work with.
+
+$ sort -u dupes.txt 
+But some text can be tricky.
+Here's a line of text.
+Text can be easy to work with.
+
+*rev - reverse string
+
+*tac print file from last line rev of cat
+
+
+$ sort -u dupes.txt | rev
+.ykcirt eb nac txet emos tuB
+.txet fo enil a s'ereH
+.htiw krow ot ysae eb nac txeT
+
+$ sort -u dupes.txt 
+But some text can be tricky.
+Here's a line of text.
+Text can be easy to work with.
+
+$ sort -u dupes.txt | tac
+Text can be easy to work with.
+Here's a line of text.
+But some text can be tricky.
+
+
+
+*tr translate based on given options
+
+tr option string1 string2(based on option may be absent) file
+
+$ sort -u dupes.txt | tr "[:space:]" "\t"
+But	some	text	can	be	tricky.	Here's	a	line	oftext.	Text	can	be	easy	to	work	with.
+
+-d - delete given string/character from string
+-s replace repeteed occurance with single character
+
+$ echo "repeated    space "
+repeated    space 
+
+$ echo "repeated    space " | tr -s "[:space:]"
+repeated space 
+
+$ echo "repeated    space " | tr -d  "ace"
+rptd    sp 
+
+
+*vim to edit text 
+
+i to insert 
+:q quit
+:w fie - create and write in file
+:wq write and quit
+
+{} paraGRAPH MOVE
+
+() move sentence 
+shift g last line
+
+* nano
+
+crtl+v to go to last line
+ct+y first line
+ctrl+o save 
+ctrl+x exit
+ctrl+w search
+
+*tar 
+
+-c create
+-f filename
+-a - compress based on extention .gz / .bz2
+-v index file
+-x extract
+-C c_dir - extract into chnaged directory
+
+*zip
+-r for folders along with content
+without it zip only takes empty folder
+
+*unzip 
+
+*test - equivalent to []
+
+runs test and gives true or false
+
+test -d X - true if x is dir
+test -f X - true if x is file
+test -s X - true if x is file and not empty
+test -x X - true if x is present script can execute it
+test -w X - true if x is present script can write in it
+test -r X - true if x is present script can read from it
+
+
+* streams
+0 - input stdin
+1 - output stdout
+2 - error stderr
+
+we can write any output comming to any stream in file using > operator
+it overwrites existing data in file
+to append data instead of overwritting use >>
+
+command x >/>> filename
+
+x for stream number
+
+ls 1>filelist2.txt 
+will write output of ls into file
+1> is very common so can be shorthanded to only >
+
+if folder does not exist it will not write in file and error will be written in terminal as error has its own stream
+to write error we have to use 2>
+
+inorder to write both streams in file use &> and append both streams use &>>
+
+$ ls >filelist2.txt
+
+$ ls notreal  >fl3.txt
+ls: cannot access 'notreal': No such file or directory
+
+$ ls notreal  2>fl3.txt
+$ cat fl3cat: fl3: No such file or directory
+$ ls >fl5.txt
+$ echo "some text " >> fl5.txt 
+$ cat fl5.txt 
+departments
+dupes.txt
+filelist2.txt
+fl3.txt
+fl5.txt
+lit2.txt
+lit.txt
+log.tar.gz
+new.txt
+poems.txt
+simple_data.txt
+subdir
+test.sh
+some text 
+
+
+*exec 
+assign number to file
+
+exec 7>text.txt
+exec 3>&1 for streams
+exec 1>&- //- closes stream
+
+*strings 
+convert content of file into strings
+
+
+
+*PATH -
+	to add path edit .profile 
+
+PATH = "$PATH:PATH/TO/TOOL"
+
+Exercise - 
+to extract tar file tar -xf log.tar.gz
+to find certain column of data stream
+to find Invalid users grep "Invalid user" file
+awk '{print $8}' file , eigth column contains username
+to get unique and sorted names
+sort -u file
+to print it in file >file2.txt
+
+grep "Invalid user" | awk '{print $8}' | sort -u >file2.txt
+
+* to get system info
+
+cat /etc/*release
+
+uname -a 
+
+*for distro kernel info 
+
+ uname -a
+ os system kernel-version build
+ Linux lenovo 4.15.0-108-generic #109-Ubuntu SMP Fri Jun 19 11:33:10 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+
+* sudo lshw 
+list hardware
+
+* ip -a 
+network info
+
+
+* cat /proc/cpuinfo
+
+*df - disk files shows spaces remaining and used
+
+*du diretory -hdx ,x is level , if x is 1 it will check only immeditate subfolder
+
+
+
+* apt advance package tool
+
+search - to search package by name
+show - show package info
+install - to install package
+update 
+upgrade 
+
+
+
