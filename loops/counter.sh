@@ -15,18 +15,18 @@ echo "loop finished"
 exit 0
 
 
-output
-:~/pypractice/bash/shell scripting$ ./counter.sh 10
-current count 1
-current count 2
-current count 3
-current count 4
-current count 5
-current count 6
-current count 7
-current count 8
-current count 9
-current count 10
-loop finished
-:~/pypractice/bash/shell scripting$ 
+# output
+#  ./counter.sh 10
+# current count 1
+# current count 2
+# current count 3
+# current count 4
+# current count 5
+# current count 6
+# current count 7
+# current count 8
+# current count 9
+# current count 10
+# loop finished
+#  
 

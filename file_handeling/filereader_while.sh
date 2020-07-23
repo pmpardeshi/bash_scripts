@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#this script reads the file given as cl args
+
 while IFS='' read -r LINE
 do
 	echo $LINE
@@ -9,6 +11,8 @@ exit 0
 
 
 # output
+
+
 
 # :~/pypractice/bash/shell scripting$ ./pipreader.sh  pipe.sh
 # #!/usr/bin/env bash

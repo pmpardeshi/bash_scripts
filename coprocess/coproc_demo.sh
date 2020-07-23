@@ -16,6 +16,9 @@ exit 0
 
 # output
 
+# 1>&2 / >&2 redirect stdout output to stderr , 2 can be replaced to streams you 
+
+
 #unnamed coprocess
 # $ echo "LOWER CasE StriNG" >&"${COPROC[1]}" //use COPROC in capital 
 # $ cat  <&"${COPROC[0]}"

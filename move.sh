@@ -25,7 +25,6 @@ dest="${files[-1]}"
 unset files[-1]
 
 #echo "${files[@]}"
-
 #echo $dest
 
 count=0
@@ -42,11 +41,15 @@ mkdir -p "${dest}"
 # done
 
 for file in "${files[@]}" ; do
-	if [[ -f "${file}" ]] ; then
-	mv "${file}" "${dest}"
-	(( count++ ))
+	if [[ ! -d "${file}" ]]; then
+		
+		if [[ -f "${file}" ]] ; then
+			mv "${file}" "${dest}"
+			(( count++ ))
+		else
+		>&2 echo error:  no file named "${file}" found 
+		fi
 	fi
-	
 done
 
 echo moved "${count}" files in "$dest"
