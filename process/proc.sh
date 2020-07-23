@@ -2,6 +2,9 @@
 
 STATUS=0
 
+#this script watches the process the terminates with process
+
+
 if [ -z $1 ]
 then 
 	echo "please give PID"
