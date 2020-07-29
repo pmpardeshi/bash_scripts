@@ -2,39 +2,40 @@
 
 #this script reads the file given as cl args
 
-while IFS='' read -r LINE
+while IFS='' read -r LINE || [ -n "$LINE" ]
 do
 	echo $LINE
 done <$1
 
 exit 0
 
+#note 
+
+#if the line does not have new line char, read cmd fails even though the line as read
+# thus || is added it will check if line has a value, after read fails so that it wont 
+# skip last line
 
 # output
 
+#without [ -n line ]
 
+# $ ./filereader_while.sh names.txt
+# roshan
+# pramod
+# shubham
+# navin
+# summet
+# $ 
 
-# :~/pypractice/bash/shell scripting$ ./pipreader.sh  pipe.sh
-# #!/usr/bin/env bash
+#with [ -n line ]
 
-# FILES=`ls -1 | sort -r | head -3 `
-# COUNT=1
-
-# for FILE in $FILES
-# do
-# echo "File $COUNT : $FILE "
-# ((COUNT++))
-# done
-
-# # output
-# # :~/pypractice/bash/shell scripting$ ./pipe.sh
-# # File 1 : while.sh
-# # File 2 : vars.sh
-# # File 3 : sports.sh
-# # :~/pypractice/bash/shell scripting$
-
-
-
-# :~/pypractice/bash/shell scripting$ 
+# $ ./filereader_while.sh names.txt 
+# roshan
+# pramod
+# shubham
+# navin
+# summet
+# swapnil
+# $
 
 

@@ -1,0 +1,6 @@
+ID	name 	sub marks
+101	roshan 	m2	75
+102	pramod	m3	50
+103	shubham	m2	40
+104	navin	m1	59
+102	pramod	m2	12

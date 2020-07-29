@@ -522,9 +522,11 @@ sort option file
 
 sorts the string based on alphabetic order of first key
 
--kx - sorts based on x column isntead of first k2 second column in aplphabetic order
+-kx - sorts based on columns starting from x to last columns isntead of first, k2 second column to last column is considered in aplphabetic order
+-kx,y - sort based on columns starting from x to y
 -n to sort in numeric order
 -u to give unique lines
+-t to give column seperator
 
 $ sort simple_data.txt 
 Ananti  991     Orange
@@ -653,6 +655,14 @@ test -s X - true if x is file and not empty
 test -x X - true if x is present script can execute it
 test -w X - true if x is present script can write in it
 test -r X - true if x is present script can read from it
+test -n X - true if syntax is correct 
+
+
+*uniq to remove consecutive repeated lines by default it keeps single occurance of multiple repeted lines
+-c count
+-i case insensitive
+-u gives only unique elements remove all  occurnce of repetition
+
 
 
 * streams
